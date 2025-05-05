@@ -1,7 +1,25 @@
 {
-  "name": "javascript-tips-wallpaper",
+  "name": "javascript-quickguide",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
+  "description": "A customizable wallpaper built with Vue 3 for use as a desktop wallpaper.",
+  "author": {
+    "name": "gracklewontsing",
+    "url": "https://github.com/gracklewontsing"
+  },
+  "license": "GPL-3.0-or-later",
+  "homepage": "https://github.com/gracklewontsing/javascript-quickguide-wallpaper",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/gracklewontsing/javascript-quickguide-wallpaper.git"
+  },
+  "copyright": "Copyright (c) 2025 gracklewontsing",
+  "keywords": [
+    "wallpaper-engine",
+    "vue3",
+    "customizable-wallpaper",
+    "interactive-wallpaper"
+  ],
   "type": "module",
   "scripts": {
     "dev": "vite",
