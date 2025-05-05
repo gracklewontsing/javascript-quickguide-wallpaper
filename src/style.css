@@ -3,15 +3,62 @@
   line-height: 1.5;
   font-weight: 400;
 
-  color-scheme: light dark;
+  color-scheme: dark;
   color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  background-color: var(--main-background-color);
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  --main-background-color: #242424;
+  --background-color-darker: #1e1e1e;
+  --background-color-lighter: #2d2d2d;
+  --button-background-color: #2d2d2d;
+  --button-background-color-hover: #444;
+  --selected-language-background-color: #303030;
+
+  --color-description: #d4d4d4;
+  --color-description-header: #ffffff;
+  --code-window-border: #333;
+  --dropdown-border: #ccc;
+  --dropdown-menu-hover: #2c2c2c;
+  --read-the-docs-color: #888;
+
+  --code-selector-header-color: #fff;
+  --reload-button-color: #fff;
+  --reload-button-color-hover: #868686;
+
+  background-image: url('');
+  background-size: cover;
+  background-position-x: 50%;
+  background-position-y: 50%;
 }
+
+:root[data-theme="light"] {
+  color-scheme: light;
+  color: #213547;
+
+  --main-background-color: #f8f8f8;
+  --background-color-darker: #ffffff;
+  --background-color-lighter: #e0e0e0;
+  --button-background-color: #e0e0e0;
+  --button-background-color-hover: #d0d0d0;
+  --selected-language-background-color: #e0e0e0;
+
+  --color-description: #333333;
+  --color-description-header: #000000;
+  --code-window-border: #ccc;
+  --dropdown-border: #888;
+  --dropdown-menu-hover: #f0f0f0;
+  --read-the-docs-color: #555;
+
+  --code-selector-header-color: #333;
+  --reload-button-color: #333;
+  --reload-button-color-hover: #666;
+}
+
 
 a {
   font-weight: 500;
@@ -90,7 +137,9 @@ button:focus-visible {
   padding: 1rem;
 }
 
-/* @media (prefers-color-scheme: light) {
+
+
+ /* @media (prefers-color-scheme: light) {
   :root {
     color: #213547;
     background-color: #ffffff;
@@ -101,4 +150,4 @@ button:focus-visible {
   button {
     background-color: #f9f9f9;
   }
-} */
+}  */

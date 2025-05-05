@@ -1,5 +1,13 @@
 <script setup lang="ts">
 import { onMounted, ref } from 'vue';
+
+declare global {
+  interface Window {
+    wallpaperPropertyListener?: {
+      applyUserProperties: (properties: any) => void;
+    };
+  }
+}
 import CodeSelector from './components/CodeSelector.vue';
 const images = import.meta.glob('/src/assets/*.svg', { eager: true, import: 'default' })
 
@@ -28,7 +36,7 @@ const getLogoSrc = (lang: string) => {
 
 const showEasterEgg = ref(false);
 
-const triggerEasterEggEasterEgg = async() => {
+const triggerEasterEggEasterEgg = async () => {
   showEasterEgg.value = true;
   await loadLanguageData('easteregg');
   if (!languages.value.includes('easteregg')) {
@@ -51,6 +59,14 @@ const snippetData = ref<Snippet>({
 const selectedLanguage = ref(languages.value[0]);
 const currentSnippetIndex = ref(0);
 
+//wallpaper engine properties
+const theme = ref('dark'); // default theme
+const backgroundImageUrl = ref(''); // default background image URL
+const backgroundSize = ref('cover'); // default background size
+const backgroundPositionX = ref('50%'); // default background position X
+const backgroundPositionY = ref('50%'); // default background position Y
+
+
 // Save selected language and snippet to localStorage
 const saveToLocalStorage = () => {
   localStorage.setItem('selectedLanguage', selectedLanguage.value);
@@ -58,15 +74,15 @@ const saveToLocalStorage = () => {
 };
 
 // Load selected language and snippet from localStorage
-const loadFromLocalStorage = async() => {
-  
+const loadFromLocalStorage = async () => {
+
   const savedLanguage = localStorage.getItem('selectedLanguage');
-  const savedSnippetIndex = localStorage.getItem('currentSnippetIndex');  
-  
+  const savedSnippetIndex = localStorage.getItem('currentSnippetIndex');
+
   if (savedLanguage) {
-    if (savedLanguage == 'easteregg') {      
-      triggerEasterEggEasterEgg()            
-    } 
+    if (savedLanguage == 'easteregg') {
+      triggerEasterEggEasterEgg()
+    }
     await loadLanguageData(savedLanguage || selectedLanguage.value);
   }
   if (savedSnippetIndex) {
@@ -159,19 +175,101 @@ const handleSnippetChange = (action: string | number) => {
   saveToLocalStorage();
 };
 
+const applyTheme = (themeName: string) => {  
+  document.documentElement.setAttribute('data-theme', themeName);
+  theme.value = themeName;
+};
+
+// Set background image and properties
+const updateBackgroundProperties = (
+  imageUrl = backgroundImageUrl.value,
+  size = backgroundSize.value,
+  posX = backgroundPositionX.value,
+  posY = backgroundPositionY.value
+) => {
+  const rootElement = document.documentElement;
+
+  // Update CSS variables for background properties
+  rootElement.style.setProperty('background-image', imageUrl ? `url(${imageUrl})` : 'none');
+  rootElement.style.setProperty('background-size', size);
+  rootElement.style.setProperty('background-position-x', posX);
+  rootElement.style.setProperty('background-position-y', posY);
+
+  // Update reactive state variables
+  backgroundImageUrl.value = imageUrl;
+  backgroundSize.value = size;
+  backgroundPositionX.value = posX;
+  backgroundPositionY.value = posY;
+};
+
+// Wallpaper Engine property listener setup
+const setupWallpaperEngineListeners = () => {
+  applyTheme('light');
+  window.wallpaperPropertyListener = {
+    applyUserProperties: function (properties) {
+      // Handle theme property
+      if (properties.theme) {
+        const newTheme = properties.theme.value;
+        applyTheme(newTheme);
+      }
+
+      // Handle background image property
+      if (properties.backgroundimage) {
+        const imagePath = properties.backgroundimage.value
+          ? 'file:///' + properties.backgroundimage.value
+          : '';
+        updateBackgroundProperties(imagePath);
+      }
+
+      // Handle background size property
+      if (properties.backgroundsize) {
+        updateBackgroundProperties(
+          backgroundImageUrl.value,
+          properties.backgroundsize.value
+        );
+      }
+
+      // Handle background position X property
+      if (properties.backgroundpositionx) {
+        const posX = properties.backgroundpositionx.value + '%';
+        updateBackgroundProperties(
+          backgroundImageUrl.value,
+          backgroundSize.value,
+          posX
+        );
+      }
+
+      // Handle background position Y property
+      if (properties.backgroundpositiony) {
+        const posY = properties.backgroundpositiony.value + '%';
+        updateBackgroundProperties(
+          backgroundImageUrl.value,
+          backgroundSize.value,
+          backgroundPositionX.value,
+          posY
+        );
+      }
+    }
+  };
+};
+
 
 
 onMounted(async () => {
   // Load last used language and snippet from localStorage
 
-if(localStorage.getItem('selectedLanguage') === null && localStorage.getItem('currentSnippetIndex') === null) {
-  // If no language is saved, load the default language    
+  if (localStorage.getItem('selectedLanguage') === null && localStorage.getItem('currentSnippetIndex') === null) {
+    // If no language is saved, load the default language    
     await loadLanguageData(selectedLanguage.value);
   } else {
     // Load the last used language and snippet
     loadFromLocalStorage();
   }
+
+  setupWallpaperEngineListeners();
 });
+
+
 </script>
 
 
@@ -182,21 +280,16 @@ if(localStorage.getItem('selectedLanguage') === null && localStorage.getItem('cu
     <transition-group name="fade" tag="div" class="logos">
       <div v-for="lang in languages" :key="lang" class="logo-container"
         :class="{ 'selected': lang === selectedLanguage }">
-        <img :src="getLogoSrc(lang)" :alt="`${lang} logo`" class="logo"
-          @click="loadLanguageData(lang)" />
+        <img :src="getLogoSrc(lang)" :alt="`${lang} logo`" class="logo" @click="loadLanguageData(lang)" />
       </div>
     </transition-group>
-    <div
-      class="hidden-trigger"
-      @click="triggerEasterEggEasterEgg"
-    >
+    <div class="hidden-trigger" @click="triggerEasterEggEasterEgg">
     </div>
     <!-- Pass the loaded language data to the CodeSelector component -->
-    <CodeSelector @changeSnippet="handleSnippetChange" :data="snippetData"
+    <CodeSelector class="selector" @changeSnippet="handleSnippetChange" :data="snippetData"
       :language="languageData?.language || 'Vue.js'"
       :languageDocumentationUrl="languageData?.documentationUrl || 'https://vuejs.org/guide/introduction.html'"
-      :snippets="languageData?.snippets || []"
-      />
+      :snippets="languageData?.snippets || []" :theme="theme || 'dark'" />
   </div>
 </template>
 
@@ -232,7 +325,7 @@ if(localStorage.getItem('selectedLanguage') === null && localStorage.getItem('cu
 }
 
 .selected {
-  background-color: #303030;
+  background-color: var(--selected-background-color);
   filter: drop-shadow(0 0 1em #6ab9fa57);
 }
 
@@ -267,20 +360,28 @@ if(localStorage.getItem('selectedLanguage') === null && localStorage.getItem('cu
     transform: scale(1);
     filter: drop-shadow(0 0 1em #478cbf);
   }
+
   to {
     transform: scale(1.1);
     filter: drop-shadow(0 0 2em #478cbf);
   }
 }
-.fade-enter-active, .fade-leave-active {
+
+.fade-enter-active,
+.fade-leave-active {
   transition: all 0.6s ease;
-  position: relative; /* helps with smoother stacking */
+  position: relative;
+  /* helps with smoother stacking */
 }
-.fade-enter-from, .fade-leave-to {
+
+.fade-enter-from,
+.fade-leave-to {
   opacity: 0;
   transform: scale(0.9);
 }
-.fade-enter-to, .fade-leave-from {
+
+.fade-enter-to,
+.fade-leave-from {
   opacity: 1;
   transform: scale(1);
 }
@@ -295,7 +396,4 @@ if(localStorage.getItem('selectedLanguage') === null && localStorage.getItem('cu
 .fade-move {
   transition: transform 0.6s ease;
 }
-
-
-
 </style>

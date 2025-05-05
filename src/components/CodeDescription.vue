@@ -41,8 +41,8 @@ watchEffect(async () => {
 
 <style scoped>
 .description-container {
-    background-color: #1e1e1e;
-    color: #d4d4d4;
+    background-color: var(--background-color-darker);
+    color: var(--color-description);
     padding: 1rem;
     border-radius: 10px;
     font-family: 'Segoe UI', sans-serif;
@@ -71,7 +71,7 @@ watchEffect(async () => {
 .description-container :deep(h1),
 .description-container :deep(h2),
 .description-container :deep(h3) {
-    color: #ffffff;
+    color: var(--color-description-header);
     margin-top: 1rem;
 }
 
@@ -99,7 +99,7 @@ watchEffect(async () => {
 }
 
 .description-container code {
-    background-color: #2d2d2d;
+    background-color: var(--background-color-lighter);
     color: #c586c0;
     padding: 2px 6px;
     border-radius: 4px;
@@ -107,7 +107,7 @@ watchEffect(async () => {
 }
 
 .description-container pre {
-    background-color: #2d2d2d;
+    background-color: var(--background-color-lighter);
     padding: 0.75rem;
     border-radius: 6px;
     overflow-x: auto;

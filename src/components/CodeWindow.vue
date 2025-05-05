@@ -4,7 +4,7 @@
       <span>{{ tabName }}</span>
     </div>
     <pre
-      class="code-body"><code v-html="highlighted" class="language-{{ props.language || 'javascript' }}"></code></pre>
+      class="code-body"><code v-html="highlighted"></code></pre>
     <transition name="fade-expand">
       <div class="output" v-if="props.output && showOutput" :key="output">
         <div style="font-family: Arial, Helvetica, sans-serif; margin-bottom: 2px">Output:</div>
@@ -153,9 +153,9 @@ select {
   display: flex;
   flex-direction: column;
   height: 100%;
-  border: 1px solid #2d2d2d;
-  background-color: #1e1e1e;
-  color: #d4d4d4;
+  border: 1px solid var(--background-color-lighter);
+  background-color: var(--background-color-darker);
+  color: var(--color-description);
   font-family: 'Fira Code', 'Courier New', monospace;
   border-radius: 8px;
   overflow: hidden;
@@ -164,10 +164,10 @@ select {
 }
 
 .code-tab {
-  background: #2d2d2d;
+  background: var(--background-color-lighter);
   padding: 0.5rem 1rem;
   font-weight: bold;
-  border-bottom: 1px solid #333;
+  border-bottom: 1px solid var(--code-window-border);
 }
 
 .code-body {
@@ -180,10 +180,10 @@ select {
 }
 
 .output {
-  background: #2d2d2d;
-  color: #d4d4d4;
+  background: var(--background-color-lighter);
+  color: var(--color-description);
   padding: 1rem;
-  border-top: 1px solid #333;
+  border-top: 1px solid var(--code-window-border);
   overflow-y: scroll;
   height: 60px;
   font-size: 12px;

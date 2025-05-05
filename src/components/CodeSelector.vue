@@ -62,6 +62,7 @@ const props = defineProps<{
     description?: string
     output?: string
   },
+  theme?: string
   snippets: Array<{ title: string }>
 }>()
 
@@ -150,7 +151,7 @@ watch(() => props.data.title, (newTitle) => {
 
 <style scoped>
 .read-the-docs {
-  color: #888;
+  color: var(--read-the-docs-color);
   text-align: center;
 }
 
@@ -185,7 +186,7 @@ CodeDescription {
 
 .header h1 {
   font-size: 2.5rem !important;
-  color: #fff;
+  color: var(--code-selector-header-color);
   margin: 1rem;
 }
 
@@ -211,7 +212,7 @@ select {
 
 button {
   padding: 5px 15px;
-  background-color: #2d2d2d;
+  background-color: var(button-background-color);
   color: white;
   border: none;
   cursor: pointer;
@@ -220,7 +221,7 @@ button {
 }
 
 button:hover {
-  background-color: #444;
+  background-color: var(button-background-color-hover);
 }
 
 select {
@@ -233,7 +234,7 @@ select {
   display: flex;
   justify-self: center !important;
   align-self: center !important;
-  color: white;
+  color: var(--reload-button-color);
   font-size: 8px;
   border: none !important;
   border-radius: 50%;
@@ -242,15 +243,15 @@ select {
   /* higher than hidden-trigger */
 }
 
-.reload-button:hover {
-  background-color: #353535 !important;
+.reload-button:hover {  
+  color: var(--reload-button-color-hover);
 }
 
 .toast {
   position: fixed;
   bottom: 20px;
   right: 20px;
-  background-color: #333;
+  background-color: var(--code-window-border);
   color: white;
   padding: 10px 20px;
   border-radius: 5px;
@@ -263,7 +264,7 @@ select {
   top: -30px;
   left: 50%;
   transform: translateX(-50%);
-  background-color: #333;
+  background-color: var(--code-window-border);
   color: white;
   padding: 5px 10px;
   border-radius: 5px;

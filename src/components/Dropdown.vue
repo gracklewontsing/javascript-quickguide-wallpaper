@@ -49,8 +49,8 @@ function selectSnippet(snippet: string): void {
     cursor: pointer;
     user-select: none;
     padding: 4px 8px;
-    background: #242424;
-    border: 1px solid #ccc;
+    background: var(--main-background-color);
+    border: 1px solid var(--dropdown-border);
     border-radius: 4px;
     font-size: 12px;
     width: 250px;
@@ -75,8 +75,8 @@ function selectSnippet(snippet: string): void {
     top: 100%;
     left: 0;
     right: 0;
-    background: #242424;
-    border: 1px solid #ccc;
+    background: var(--main-background-color);
+    border: 1px solid var(--dropdown-border);
     z-index: 1000;
     font-size: 12px;
     min-width: 99%;
@@ -98,6 +98,6 @@ ul {
 }
 
 .dropdown-menu li:hover {
-    background-color: #2c2c2c;
+    background-color: var(--dropdown-menu-hover);
 }
 </style>
