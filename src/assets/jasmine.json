@@ -1,0 +1,216 @@
+{
+  "language": "Jasmine",
+  "documentationUrl": "https://jasmine.github.io/",
+  "snippets": [
+    {
+      "title":"Jasmine Starter",
+      "filename":"spec",
+      "fileType":".js",
+      "code":"describe('My first test suite', function() {\n  it('should be true', function() {\n    expect(true).toBe(true);\n  });\n});",
+      "description":"Jasmine is a behavior-driven development framework for testing JavaScript code. It provides a clean syntax for writing tests and supports spies, mocks, and assertions. Jasmine is often paired with Karma for running tests in various browsers. In order to use Jasmine, you need to include the Jasmine library in your project. This can be achieved by either downloading the library files or using a package manager like npm. Once you have the library set up, you can start writing your tests using the describe and it functions. \n\n The describe function is used to group related tests, while the it function defines an individual test case. Inside the it function, you can use various matchers provided by Jasmine to make assertions about your code's behavior.",
+      "output":"\nMy first test suite\n  should be true\n    ✓ should be true\n"
+    },
+    {
+      "title":"Suites and Specs",
+      "filename":"spec",
+      "fileType":".js",
+      "code":"describe('Math operations', function() {\n  describe('Addition', function() {\n    it('should add two numbers', function() {\n      expect(1 + 1).toBe(2);\n    });\n  });\n});",
+      "description":"In Jasmine, you can create nested suites using the describe function. This allows you to organize your tests hierarchically. In this example, we have a suite for Math operations and a nested suite for Addition. Each suite can contain multiple specs (test cases). \n\n ## Specs \n\n Specs are individual test cases defined using the `it` function. Each spec should contain a single assertion that checks a specific behavior of your code. In this example, we have a spec that checks if adding two numbers produces the expected result.",
+      "output":"\nMath operations\n  Addition\n    should add two numbers\n      ✓ should add two numbers\n"
+    },
+    {
+      "title":"Expectations",
+      "filename":"spec",
+      "fileType":".js",  
+      "code":"describe('Array operations', function() {\n  it('should contain an element', function() {\n    var arr = [1, 2, 3];\n    expect(arr).toContain(2);\n  });\n});",
+      "description":"Expectations are the core of Jasmine's testing framework. They are used to assert that a certain condition is true. In this example, we use the toContain matcher to check if an array contains a specific element. If the expectation fails, Jasmine will report it as a failed test.",
+      "output":"\nArray operations\n  should contain an element\n    ✓ should contain an element\n"
+    },
+    {
+      "title":"Matchers",
+      "filename":"spec",
+      "fileType":".js",
+      "code":"describe('String operations', function() {\n  it('should check string equality', function() {\n    expect('Hello').toEqual('Hello');\n  });\n});",
+      "description":"Jasmine provides a variety of matchers to make assertions about your code's behavior. Matchers are functions that check if a value meets certain conditions. In this example, we use the toEqual matcher to check if two strings are equal. \n\n ## Common Matchers \n\n - `toBe(value)`: Checks if the actual value is the same as the expected value. \n - `toEqual(value)`: Checks if the actual value is equal to the expected value. \n - `toContain(value)`: Checks if an array or string contains a specific value. \n - `toBeTruthy()`: Checks if a value is truthy. \n - `toBeFalsy()`: Checks if a value is falsy. \n\n ## Custom Matchers \n\n You can also create custom matchers to extend Jasmine's functionality. Custom matchers allow you to define your own assertions based on your specific needs. This can be useful for creating more readable and expressive tests. For example, you can create a custom matcher to check if an object has a specific property or if a string matches a certain pattern. Custom matchers can be defined using the `jasmine.addMatchers` function, which allows you to specify the behavior of your custom matcher and how it should be reported in test results. Your custom matcher would look like this:\n\n ```javascript\n jasmine.addMatchers({\n   toBeEven: function() {\n     return {\n       compare: function(actual) {\n         return {\n           pass: actual % 2 === 0,\n           message: actual + ' is not even'\n         };\n       }\n     };\n   }\n });\n ```\n\n You can then use your custom matcher in your tests like this:\n\n ```javascript\n expect(4).toBeEven();\n ```",
+      "output":"\nString operations\n  should check string equality\n    ✓ should check string equality\n"
+    },
+    {
+      "title":"Spies",
+      "filename":"spec",
+      "fileType":".js",
+      "code":"describe('Spies', function() {\n  it('should spy on a function', function() {\n    var myObj = {\n      myMethod: function() {}\n    };\n    spyOn(myObj, 'myMethod');\n    myObj.myMethod();\n    expect(myObj.myMethod).toHaveBeenCalled();\n  });\n});",
+      "description":"Spies are a powerful feature of Jasmine that allow you to track function calls and their arguments. You can create spies on existing functions or create new spy functions. In this example, we create a spy on the myMethod function of an object and check if it was called. \n\n ## Spying on Functions \n\n You can use the `spyOn` function to create a spy on an existing function. This allows you to track how many times the function was called, what arguments were passed, and whether it was called with specific arguments. In this example, we create a spy on the myMethod function and check if it was called using the `toHaveBeenCalled` matcher. \n\n ## Stubbing Functions \n\n You can also use spies to stub functions, which means replacing the original implementation with a custom implementation. This is useful for testing how your code interacts with external dependencies without actually calling them. You can use the `and.callFake` method to provide a custom implementation for the spy. For example:\n\n ```javascript\n spyOn(myObj, 'myMethod').and.callFake(function() {\n   return 'Stubbed value';\n });\n ```\n\n This allows you to control the behavior of the function during testing.",
+      "output":"\nSpies\n  should spy on a function\n    ✓ should spy on a function\n"
+    },
+    {
+      "title":"Asynchronous Testing",
+      "filename":"spec",
+      "fileType":".js", 
+      "code":"describe('Asynchronous testing', function() {\n  it('should handle asynchronous code', function(done) {\n    setTimeout(function() {\n      expect(true).toBe(true);\n      done();\n    }, 1000);\n  });\n});",
+      "description":"Jasmine supports asynchronous testing using the done callback. This allows you to test code that involves asynchronous operations, such as AJAX requests or timers. In this example, we use setTimeout to simulate an asynchronous operation and call the done function when the test is complete. \n\n ## Asynchronous Code \n\n When testing asynchronous code, you need to ensure that Jasmine waits for the asynchronous operation to complete before checking the expectations. You can do this by passing a done callback to the it function. When the asynchronous operation is complete, you call the done function to signal that the test is finished. This prevents Jasmine from prematurely reporting the test as complete.",
+      "output":"\nAsynchronous testing\n  should handle asynchronous code\n    ✓ should handle asynchronous code\n"
+    },
+    {
+      "title":"Setup and Teardown",
+      "filename":"spec",
+      "fileType":".js",
+      "code":"describe('Setup and teardown', function() {\n  beforeEach(function() {\n    // Code to run before each test\n  });\n\n  afterEach(function() {\n    // Code to run after each test\n  });\n\n  it('should run a test', function() {\n    expect(true).toBe(true);\n  });\n});",
+      "description":"Jasmine provides setup and teardown functions that allow you to run code before and after each test. This is useful for initializing test data or cleaning up after tests. In this example, we use beforeEach and afterEach to define setup and teardown code. \n\n ## Setup Code \n\n The `beforeEach` function is called before each spec in the suite. You can use it to set up any necessary state or data for your tests. For example, you might want to create a new instance of an object or reset some variables before each test. \n\n ## Teardown Code \n\n The `afterEach` function is called after each spec in the suite. You can use it to clean up any resources or state that were created during the test. This ensures that each test runs in isolation and does not affect other tests. \n\n ## Other Setup/Teardown Functions \n\n In addition to `beforeEach` and `afterEach`, Jasmine also provides `beforeAll` and `afterAll` functions that run once before or after all tests in a suite. These can be useful for setting up global state or resources that are shared across multiple tests. For example, you might want to establish a database connection before running all tests and close it afterward.",
+      "output":"\nSetup and teardown\n  should run a test\n    ✓ should run a test\n"
+    },
+    {
+      "title": "this",
+      "filename": "spec",
+      "fileType": ".js",
+      "code": "describe('this keyword', function() {\n  it('should refer to the current context', function() {\n    var obj = {\n      value: 42,\n      getValue: function() {\n        return this.value;\n      }\n    };\n    expect(obj.getValue()).toBe(42);\n  });\n});",
+      "description": "In JavaScript, the `this` keyword refers to the current context in which a function is executed. In the context of a method, `this` refers to the object that the method is called on. In this example, we define an object with a method that returns its value using this. \n\n This is particularly important in Jasmine tests, as the context of `this` can change depending on how the test is defined. In Jasmine, `this` inside a spec refers to the current spec context, which allows you to access properties and methods defined in the suite. \n\n ## Arrow Functions \n\n Note that arrow functions do not have their own `this` context. If you use an arrow function as a method, `this` will refer to the surrounding context, not the object itself. To ensure that `this` refers to the object, use regular function syntax. For example:\n\n ```javascript\n var obj = {\n   value: 42,\n   getValue: () => {\n     return this.value;\n   }\n }; \n ```\n\n In this case, `this.value` will not refer to the object's value, but rather to the surrounding context's value. This is a common pitfall when using arrow functions in JavaScript, so be cautious when using them in methods.", 
+      "output": "\nthis keyword\n  should refer to the current context\n    ✓ should refer to the current context\n"
+    },
+    {
+      "title": "Promises",
+      "filename": "spec",
+      "fileType": ".js",
+      "code": "describe('Promises', function() {\n  it('should handle asynchronous code with promises', function(done) {\n    var promise = new Promise(function(resolve, reject) {\n      setTimeout(function() {\n        resolve('Resolved!');\n      }, 1000);\n    });\n\n    promise.then(function(result) {\n      expect(result).toBe('Resolved!');\n      done();\n    });\n  });\n});",
+      "description": "Promises are a way to handle asynchronous operations in JavaScript. They represent a value that may be available now, or in the future, or never. In this example, we create a promise that resolves after a timeout and check its result using the then method. \n\n ## Creating Promises \n\n You can create a promise using the `Promise` constructor. The constructor takes a function with two parameters: `resolve` and `reject`. You call `resolve` when the asynchronous operation is successful and `reject` when it fails. \n\n ## Handling Promises \n\n You can handle the result of a promise using the `then` method. The `then` method takes two callbacks: one for success and one for failure. In this example, we check if the promise resolves with the expected value.",
+      "output": "\nPromises\n  should handle asynchronous code with promises\n    ✓ should handle asynchronous code with promises\n"
+    },
+    {
+      "title": "Manual Failures",
+      "filename": "spec",
+      "fileType": ".js",
+      "code": "describe('Manual failures', function() {\n  it('should fail manually', function() {\n    fail('This test fails manually');\n  });\n});",
+      "description": "You can manually fail a test using the `fail` function. This is useful for indicating that a test should fail under certain conditions. In this example, we manually fail the test with a message. \n\n ## Manual Failures \n\n The `fail` function takes an optional message parameter that describes why the test failed. This can be helpful for debugging and understanding the reason for the failure. You can use manual failures to indicate that a specific condition was not met or that an expected error did not occur.",
+      "output": "\nManual failures\n  should fail manually\n    ✗ should fail manually\n"
+    },
+    {
+      "title": "Dynamic Test Generation",
+      "filename": "spec",
+      "fileType": ".js",
+      "code": "describe('Dynamic test generation', function() {\n  var numbers = [1, 2, 3];\n\n  numbers.forEach(function(number) {\n    it('should check if ' + number + ' is even', function() {\n      expect(number % 2).toBe(0);\n    });\n  });\n});",
+      "description": "You can dynamically generate tests using loops or other constructs. This allows you to create multiple tests based on a set of data. In this example, we generate tests for checking if numbers are even. \n\n ## Dynamic Test Generation \n\n You can use loops or array methods like `forEach` to create multiple tests based on a set of data. This is useful for testing similar behavior with different inputs. In this example, we loop through an array of numbers and create a test for each number to check if it is even.",
+      "output": "\nDynamic test generation\n  should check if 1 is even\n    ✗ should check if 1 is even\n  should check if 2 is even\n    ✓ should check if 2 is even\n  should check if 3 is even\n    ✗ should check if 3 is even\n"
+    },
+    {
+      "title": "Custom Reporters",
+      "filename": "spec",
+      "fileType": ".js",
+      "code": "describe('Custom reporters', function() {\n  it('should create a custom reporter', function() {\n    var customReporter = {\n      specStarted: function(result) {\n        console.log('Spec started: ' + result.description);\n      },\n      specDone: function(result) {\n        console.log('Spec done: ' + result.description);\n      }\n    };\n\n    jasmine.getEnv().addReporter(customReporter);\n  });\n});",
+      "description": "You can create custom reporters to customize the output of your test results. Custom reporters allow you to format the output, log results to a file, or integrate with other tools. In this example, we create a custom reporter that logs spec start and end events. \n\n ## Creating Custom Reporters \n\n You can create a custom reporter by defining an object with methods that correspond to different events in the testing process. For example, you can define `specStarted` and `specDone` methods to handle spec start and end events. You can then add the custom reporter to the Jasmine environment using `jasmine.getEnv().addReporter(customReporter)`.",
+      "output": "\nCustom reporters\n  should create a custom reporter\n    ✓ should create a custom reporter\n"
+    },
+    {
+      "title": "Deep Equality",
+      "filename": "spec",
+      "fileType": ".js",
+      "code": "describe('Expecting deep equality', function() {\n  it('should check deep equality of objects', function() {\n    var obj1 = { a: 1, b: { c: 2 } };\n    var obj2 = { a: 1, b: { c: 2 } };\n    expect(obj1).toEqual(obj2);\n  });\n});",  
+      "description": "You can check deep equality of objects using the toEqual matcher. This checks if two objects have the same structure and values. In this example, we check if two objects are deeply equal. \n\n ## Deep Equality \n\n The `toEqual` matcher performs a deep comparison of objects, meaning it checks if all properties and nested properties are equal. This is useful for comparing complex data structures like arrays and objects. If you want to check if two objects are strictly equal (same reference), you can use the `toBe` matcher instead.",
+      "output": "\nExpecting deep equality\n  should check deep equality of objects\n    ✓ should check deep equality of objects\n"
+    },
+    {
+      "title": "Uncertain Values",
+      "filename": "spec",
+      "fileType": ".js",
+      "code": "describe('Expecting uncertain values', function() {\n  it('should check if a value is defined', function() {\n    var value;\n    expect(value).toBeUndefined();\n  });\n});",
+      "description": "You can check if a value is undefined or null using the toBeUndefined and toBeNull matchers. In this example, we check if a variable is undefined. \n\n ## Undefined and Null Values \n\n The `toBeUndefined` matcher checks if a value is undefined, while the `toBeNull` matcher checks if a value is null. These matchers are useful for verifying that variables have not been assigned a value or that an object property does not exist.",
+      "output": "\nExpecting uncertain values\n  should check if a value is defined\n    ✓ should check if a value is defined\n"
+    },
+    {
+      "title": "Matching with More Finesse",
+      "filename": "spec", 
+      "fileType": ".js",
+      "description":"As described in the Jasmine documentation, you usually don't expect your test to all match with exact equality. Jasmine provides a number of assymetric equality testers. \n\n ## Asymmetric Matchers \n\n Asymmetric matchers are used to check if a value matches a specific condition. For example, you can use the `jasmine.any` matcher to check if a value is of a certain type, or the `jasmine.objectContaining` matcher to check if an object contains specific properties. \n\n In this example, we use the `jasmine.any` matcher to check if a value is a string. This allows you to write more flexible tests that can match different types of values without being too strict. \n\n There are a number of asymmetric matchers available in Jasmine, including: \n\n - `jasmine.any(type)`: Checks if a value is of the specified type. \n - `jasmine.objectContaining(obj)`: Checks if an object contains specific properties. \n - `jasmine.arrayContaining(arr)`: Checks if an array contains specific elements. \n\n These matchers allow you to write more flexible tests that can match different types of values without being too strict.",
+      "code":"describe('Matching with more finesse', function() {\n  it('should check if a value is a string', function() {\n    var value = 'Hello'; \n    expect(value).toEqual(jasmine.any(String));\n  });\n});",
+      "output": "\nMatching with more finesse\n  should check if a value is a string\n    ✓ should check if a value is a string\n"      
+    },
+    {
+      "title": "Error Handling",
+      "filename": "spec",
+      "fileType": ".js",
+      "code": "describe('Error handling', function() {\n  it('should throw an error', function() {\n    function throwError() {\n      throw new Error('This is an error');\n    }\n    expect(throwError).toThrowError('This is an error');\n  });\n});",  
+      "description": "You can check if a function throws an error using the toThrowError matcher. This is useful for testing error handling in your code. In this example, we check if a function throws an error with a specific message. \n\n ## Error Handling \n\n The `toThrowError` matcher checks if a function throws an error when called. You can also specify the expected error type or message. This is useful for testing error handling in your code and ensuring that your code behaves correctly in error scenarios.", 
+      "output": "\nError handling\n  should throw an error\n    ✓ should throw an error\n"
+    },
+    {
+      "title": "Test Driven Development (TDD)",
+      "filename": "spec",
+      "fileType": ".js",
+      "description": "Test Driven Development (TDD) is a software development approach where you write tests before writing the actual code. This helps ensure that your code meets the requirements and behaves as expected. In TDD, you typically follow these steps: \n\n 1. Write a failing test that describes the desired behavior. \n 2. Run the test to confirm it fails. \n 3. Write the minimum amount of code to make the test pass. \n 4. Refactor the code if necessary while keeping the tests passing. \n 5. Repeat the process for new features or changes.\n\n TDD encourages you to think about the design and requirements of your code before implementation, leading to better code quality and fewer bugs.",
+      "code": "describe('Test Driven Development (TDD)', function() {\n  it('should write a failing test', function() {\n    expect(true).toBe(false);\n  });\n});",
+      "output": "\nTest Driven Development (TDD)\n  should write a failing test\n    ✓ should write a failing test\n"
+    },
+    {
+      "title": "Behavior Driven Development (BDD)",
+      "filename": "spec",
+      "fileType": ".js",
+      "description": "Behavior Driven Development (BDD) is an extension of TDD that focuses on the behavior of the system from the user's perspective. In BDD, you write tests in a way that describes the expected behavior of the system in natural language. This helps improve communication between developers, testers, and non-technical stakeholders. \n\n In comparison to TDD, BDD emphasizes collaboration and understanding of the requirements. It encourages you to write tests that describe how the system should behave in different scenarios. This can lead to better test coverage and more meaningful tests that reflect the user's needs. \n\n BDD tests are often written in a Given-When-Then format, where you describe the initial state (Given), the action taken (When), and the expected outcome (Then). This format makes it easier to understand the purpose of the test and its relation to user stories or requirements. For example, instead of writing a test that checks if a function returns the correct value, you would write a test that describes the behavior of the system in a specific scenario. This helps ensure that the tests are aligned with the user's expectations and requirements. A BDD test might look like this:\n\n ```javascript\n describe('User login', function() {\n   it('should allow a user to log in with valid credentials', function() {\n     // Given a user with valid credentials\n     // When the user logs in\n     // Then the user should be redirected to the dashboard\n   });\n });\n ```\n\n In this example, the test describes the expected behavior of the system when a user logs in with valid credentials. This makes it easier to understand the purpose of the test and its relation to the user's needs. \n       \n\n BDD encourages you to think about the requirements and user stories before writing tests. You can use tools like Cucumber or SpecFlow to write BDD-style tests in a more readable format. In Jasmine, you can use the describe and it functions to create BDD-style tests.",
+      "code":"describe('User login', function() {\n  it('should allow a user to log in with valid credentials', function() {\n    // Given a user with valid credentials\n let user = { username: 'test', password: 'password' };\n\n    // When the user logs in\n    let result = login(user);\n\n    // Then the user should be redirected to the dashboard\n    expect(result).toBe('dashboard');\n  });\n});\n\nfunction login(user) {\n  if (user.username === 'test' && user.password === 'password') {\n    return 'dashboard';\n  }\n  return 'login';\n}",
+      "output": "\nBehavior Driven Development (BDD)\n  should describe the expected behavior\n    ✓ should describe the expected behavior\n"
+    },
+    {
+      "title": "Code Coverage",
+      "filename": "spec",
+      "fileType": ".js",
+      "description": "Code coverage is a measure of how much of your code is executed during tests. It helps identify untested parts of your codebase. You can use tools like Istanbul or NYC to generate code coverage reports for your Jasmine tests. These tools instrument your code and track which lines are executed during tests. After running your tests, you can generate a coverage report that shows which lines were covered and which were not. This helps you identify areas that need more testing and improve the overall quality of your code.",
+      "code": "describe('Code coverage', function() {\n  it('should check code coverage', function() {\n    var covered = true;\n    expect(covered).toBe(true);\n  });\n});",
+      "output": "\nCode coverage\n  should check code coverage\n    ✓ should check code coverage\n"
+    },
+    {
+      "title": "Mocking",
+      "filename": "spec",
+      "fileType": ".js",
+      "description": "Mocking is a technique used in testing to create fake objects or functions that simulate the behavior of real objects. This allows you to isolate the code being tested and control its dependencies. In Jasmine, you can use spies to create mocks for functions and objects. Mocks are useful for testing how your code interacts with external dependencies without actually calling them. This helps ensure that your tests are focused on the code being tested and not on the behavior of external dependencies.",
+      "code": "describe('Mocking', function() {\n  it('should mock a function', function() {\n    var myObj = {\n      myMethod: function() {}\n    };\n    spyOn(myObj, 'myMethod').and.returnValue('Mocked value');\n    var result = myObj.myMethod();\n    expect(result).toBe('Mocked value');\n  });\n});",
+      "output": "\nMocking\n  should mock a function\n    ✓ should mock a function\n"
+    },
+    
+    {
+      "title": "Integration Testing",
+      "filename": "spec",
+      "fileType": ".js",
+      "description": "Integration testing is a type of testing that focuses on verifying the interactions between different components or modules of your application. It ensures that the components work together as expected. In Jasmine, you can write integration tests by creating specs that test the interactions between multiple functions or modules. This helps ensure that your code behaves correctly when different parts of the system are combined. \n\n Integration tests are typically more complex than unit tests, as they involve multiple components and their interactions. They can help identify issues that may not be apparent when testing individual components in isolation. Integration tests can also help ensure that changes to one component do not break the functionality of other components. \n\n In Jasmine, you can write integration tests using the same syntax as unit tests. You can create a suite of tests that cover different scenarios and interactions between components. This helps ensure that your code is robust and works correctly in a real-world environment.",
+      "code": "describe('Integration testing', function() {\n  it('should test the interaction between two functions', function() {\n    var result = add(2, 3);\n    expect(result).toBe(5);\n  });\n});\n\nfunction add(a, b) {\n  return a + b;\n}",
+      "output": "\nIntegration testing\n  should test the interaction between two functions\n    ✓ should test the interaction between two functions\n"
+    },
+    {
+      "title": "End-to-End Testing",
+      "filename": "spec",
+      "fileType": ".js",
+      "description": "End-to-end testing is a type of testing that verifies the entire application flow from start to finish. It ensures that all components work together as expected in a real-world scenario. In Jasmine, you can write end-to-end tests by simulating user interactions and checking the final state of the application. This helps ensure that your application behaves correctly in a production-like environment. \n\n End-to-end tests are typically more complex and time-consuming than unit or integration tests, as they involve multiple components and their interactions. They can help identify issues that may not be apparent when testing individual components in isolation. End-to-end tests can also help ensure that changes to one component do not break the functionality of other components. \n\n In Jasmine, you can write end-to-end tests using the same syntax as unit tests. You can create a suite of tests that cover different scenarios and interactions between components. This helps ensure that your code is robust and works correctly in a real-world environment.",
+      "code": "describe('End-to-end testing', function() {\n  it('should test the entire application flow', function() {\n    var result = login('user', 'password');\n    expect(result).toBe('dashboard');\n  });\n});\n\nfunction login(username, password) {\n  if (username === 'user' && password === 'password') {\n    return 'dashboard';\n  }\n  return 'login';\n}",
+      "output": "\nEnd-to-end testing\n  should test the entire application flow\n    ✓ should test the entire application flow\n"
+    },
+    {
+      "title": "Continuous Integration (CI)",
+      "filename": "spec",
+      "fileType": ".js",
+      "description": "Continuous Integration (CI) is a software development practice where developers frequently integrate their code changes into a shared repository. Each integration is verified by an automated build and test process to detect errors quickly. In Jasmine, you can set up CI pipelines to run your tests automatically whenever code changes are pushed to the repository. This helps ensure that your code remains stable and that new changes do not introduce regressions.",
+      "code": "describe('Continuous Integration (CI)', function() {\n  it('should run tests automatically', function() {\n    var result = true;\n    expect(result).toBe(true);\n  });\n});",
+      "output": "\nContinuous Integration (CI)\n  should run tests automatically\n    ✓ should run tests automatically\n"
+    },
+    {
+      "title": "Test Automation",
+      "filename": "spec",
+      "fileType": ".js",
+      "description": "Test automation is the process of using software tools to run tests automatically. This helps reduce manual testing efforts and ensures that tests are executed consistently. In Jasmine, you can automate your tests by integrating them with CI/CD pipelines or using test runners like Karma. This allows you to run your tests automatically whenever code changes are made, ensuring that your code remains stable and that new changes do not introduce regressions.",
+      "code": "describe('Test automation', function() {\n  it('should run tests automatically', function() {\n    var result = true;\n    expect(result).toBe(true);\n  });\n});",
+      "output": "\nTest automation\n  should run tests automatically\n    ✓ should run tests automatically\n"
+    },
+    {
+      "title": "Test Reporting",
+      "filename": "spec",
+      "fileType": ".js",
+      "description": "Test reporting is the process of generating reports that summarize the results of your tests. This helps you track the status of your tests and identify any issues that need to be addressed. In Jasmine, you can use built-in reporters or create custom reporters to generate test reports in different formats. This allows you to integrate your test results with other tools and systems, making it easier to track the status of your tests and identify any issues that need to be addressed.",
+      "code": "describe('Test reporting', function() {\n  it('should generate test reports', function() {\n    var result = true;\n    expect(result).toBe(true);\n  });\n});",
+      "output": "\nTest reporting\n  should generate test reports\n    ✓ should generate test reports\n"
+    },
+    {
+      "title": "Best Practices",
+      "filename": "spec",
+      "fileType": ".js",
+      "description": "To write effective tests in Jasmine, follow these best practices: \n\n 1. Write clear and descriptive test names that explain the purpose of the test. \n 2. Keep your tests focused on a single behavior or functionality. \n 3. Use setup and teardown functions to manage test state and resources. \n 4. Use spies and mocks to isolate the code being tested. \n 5. Write tests that are easy to read and understand. \n 6. Run your tests frequently to catch issues early.",
+      "code": "describe('Best practices', function() {\n  it('should follow best practices', function() {\n    var result = true;\n    expect(result).toBe(true);\n  });\n});",
+      "output": "\nBest practices\n  should follow best practices\n    ✓ should follow best practices\n"
+    }
+
+  ]
+}

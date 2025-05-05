@@ -1,0 +1,127 @@
+{
+    "language": "TypeScript",
+    "documentationUrl": "https://www.typescriptlang.org/docs/",
+    "snippets": [
+        {
+            "title": "Typescript Starter",
+            "filename": "hello-world",
+            "fileType": ".ts",
+            "code": "let message: string = 'Hello, TypeScript!'\nconsole.log(message)",
+            "description": "TypeScript is a superset of JavaScript that adds static typing to the language. It allows developers to catch errors at compile time and provides better tooling support. TypeScript is widely used in modern web development, especially with frameworks like Angular, React, and Vue.js. \n\n Typescript, in comparison to JavaScript, is a statically typed language, meaning that you can define the types of variables, function parameters, and return values. This helps catch type-related errors during development. \n\n TypeScript also supports modern JavaScript features, such as async/await, destructuring, and arrow functions. It compiles down to plain JavaScript, making it compatible with all browsers and environments. \n\n In this example, we define a variable called message with the type string and log it to the console.",
+            "output": "Hello, TypeScript!"
+        },
+        {
+            "title": "Typing",	
+            "filename": "typing",
+            "fileType": ".ts",
+            "code": "let message: string = 'Hello, TypeScript!'\nlet count: number = 42\nlet isActive: boolean = true\nlet items: string[] = ['apple', 'banana', 'orange']\nlet user: { name: string; age: number } = { name: 'Alice', age: 30 }",
+            "description": "TypeScript allows you to define types for variables, function parameters, and return values. This helps catch type-related errors during development. In this example, we define variables with different types, including string, number, boolean, array, and object. \n\n Types can also be inferred by TypeScript based on the assigned value. For example, if you assign a string to a variable, TypeScript will infer its type as string. \n\n Typescript also supports union types, which allow a variable to hold multiple types. For example, `let value: string | number = 'Hello';` allows value to be either a string or a number. \n\n You can also define custom types using interfaces and type aliases. This helps create more complex data structures and improves code readability.",
+            "output": ""
+        },
+        {
+            "title": "Generics and Custom Types",
+            "filename": "generics",
+            "fileType": ".ts",
+            "code": "function identity<T>(arg: T): T {\n    return arg;\n}\n\nlet result = identity<string>('Hello, TypeScript!');\nconsole.log(result);",
+            "description": "Generics allow you to create reusable components that work with different types. In this example, we define a generic function called identity that takes an argument of type T and returns the same type. This allows us to use the function with different types without losing type safety. \n\n You can also create generic classes and interfaces to define reusable data structures. For example, you can create a generic Stack class that works with any type of elements.",
+            "output": "Hello, TypeScript!"
+        },
+        {
+            "title": "Interfaces",
+            "filename": "interfaces",
+            "fileType": ".ts",
+            "code": "interface User {\n    name: string;\n    age: number;\n}\n\nlet user: User = { name: 'Alice', age: 30 };\nconsole.log(user.name);",
+            "description": "Interfaces define the structure of an object. They allow you to specify the properties and methods that an object should have. In this example, we define an interface called User with properties name and age. We then create an object that conforms to this interface. \n\n Interfaces can also extend other interfaces, allowing you to create complex data structures. For example, you can create a BaseUser interface and extend it to create AdminUser and RegularUser interfaces with additional properties. \n\n You can also use interfaces to define function types, allowing you to specify the signature of a function. This helps ensure that functions are called with the correct arguments and return types. \n\n TypeScript also supports optional properties and readonly properties in interfaces. Optional properties are denoted with a question mark (?), indicating that they may or may not be present in the object. Readonly properties are denoted with the readonly keyword, indicating that they cannot be modified after initialization.",
+            "output": "Alice"
+        },
+        {
+            "title": "Classes and Inheritance",
+            "filename": "classes",
+            "fileType": ".ts",
+            "code": "class Animal {\n    constructor(public name: string) {}\n    makeSound(): void {\n        console.log('Animal sound');\n    }\n}\n\nclass Dog extends Animal {\n    makeSound(): void {\n        console.log('Woof!');\n    }\n}\n\nlet dog = new Dog('Buddy');\ndog.makeSound();",
+            "description": "TypeScript supports object-oriented programming with classes and inheritance. In this example, we define a base class called Animal with a constructor and a method. We then create a subclass called Dog that extends the Animal class and overrides the makeSound method.",
+            "output": "Woof!"
+        },
+        {
+            "title": "Modules and Namespaces",
+            "filename": "modules",
+            "fileType": ".ts",
+            "code": "export class MathUtils {\n    static add(a: number, b: number): number {\n        return a + b;\n    }\n}\n\nimport { MathUtils } from './math-utils';\n\nlet sum = MathUtils.add(5, 10);\nconsole.log(sum);",
+            "description": "TypeScript supports modules and namespaces to organize code. In this example, we define a module called MathUtils with a static method. We then import the module and use its method in another file.",
+            "output": "15"
+        },
+        {
+            "title": "Asynchronous Programming",
+            "filename": "async",
+            "fileType": ".ts",  
+            "code": "function fetchData(): Promise<string> {\n    return new Promise((resolve) => {\n        setTimeout(() => {\n            resolve('Data fetched!');\n        }, 2000);\n    });\n}\n\nfetchData().then((data) => {\n    console.log(data);\n});",
+            "description": "TypeScript supports asynchronous programming with Promises and async/await syntax. In this example, we define a function that returns a Promise and use the then method to handle the resolved value. \n\n You can also use async/await syntax to write asynchronous code in a more synchronous style. This makes it easier to read and understand. For example, you can define an async function and use the await keyword to wait for a Promise to resolve. \n\n The main difference between async programming in TypeScript and JavaScript is that TypeScript provides static typing for Promises and async functions. This allows you to catch type-related errors at compile time and improves code readability. \n\n TypeScript also supports error handling in asynchronous code using try/catch blocks. This allows you to handle errors that may occur during asynchronous operations.",
+            "output": "Data fetched!"
+        },
+        {
+            "title": "Decorators",
+            "filename": "decorators",
+            "fileType": ".ts",
+            "code": "@decorator\nclass MyClass {\n    @methodDecorator\n    myMethod() {}\n}\n\ntype Decorator = (target: any, propertyKey: string, descriptor: PropertyDescriptor) => void;\n\nfunction decorator(target: any) {\n    console.log('Decorator applied to class:', target);\n}\n\nfunction methodDecorator(target: any, propertyKey: string, descriptor: PropertyDescriptor): void {\n    console.log('Decorator applied to method:', propertyKey);\n}",
+            "description": "Decorators are a powerful feature in TypeScript that allows you to modify classes, methods, properties, and parameters at runtime. They are often used in frameworks like Angular for dependency injection and metadata generation. In this example, we define a class decorator and a method decorator. The decorators log messages when applied to the class and method.",
+            "output": "Decorator applied to class: [class MyClass]\nDecorator applied to method: myMethod"
+        },
+        {
+            "title": "Type Assertions",
+            "filename": "type-assertions",
+            "fileType": ".ts",
+            "code": "let value: any = 'Hello, TypeScript!';\nlet length: number = (value as string).length;\nconsole.log(length);",
+            "description": "Type assertions allow you to tell the TypeScript compiler to treat a value as a specific type. In this example, we use the as keyword to assert that the value is a string and access its length property. This is essentially a cast to a more specific type. \n\n Type assertions are useful when you know more about the type of a value than TypeScript can infer. However, you should use them judiciously, as they can lead to runtime errors if used incorrectly. \n\n Type assertions can also be used with interfaces and custom types. For example, you can assert that an object conforms to a specific interface, allowing you to access its properties and methods without TypeScript raising type errors.",
+            "output": "17"
+        },
+        {
+            "title": "Type Guards",
+            "filename": "type-guards",
+            "fileType": ".ts",
+            "code": "function isString(value: any): value is string {\n    return typeof value === 'string';\n}\n\nlet value: any = 'Hello, TypeScript!';\nif (isString(value)) {\n    console.log(value.length);\n}",
+            "description": "Type guards are a way to narrow down the type of a value based on certain conditions. In this example, we define a type guard function called isString that checks if a value is a string. We then use this function in an if statement to narrow down the type of the value. \n\n Type guards can be used with custom types, interfaces, and union types. They help ensure that you are working with the correct type before accessing properties or methods.",
+            "output": "17"
+        },
+        {
+            "title": "Enums",
+            "filename": "enums",
+            "fileType": ".ts",
+            "code": "enum Direction {\n    Up,\n    Down,\n    Left,\n    Right\n}\n\nlet direction: Direction = Direction.Up;\nconsole.log(direction);",
+            "description": "Enums are a way to define a set of named constants. Enum values are naturally numeric, starting from 0 by default. They can be used to represent a collection of related values. In this example, we define an enum called Direction with four possible values. We then create a variable of type Direction and assign it a value from the enum. \n\n Enums can be numeric or string-based. Numeric enums assign a number to each member, while string enums assign a string value. You can also use computed values in enums, allowing you to create more complex enum structures. Usually, accessing the enum value will return the index of the enum member, but you can also access the enum member by its name. This is because enums are bidirectional, meaning you can access the enum member by its name or its value. \n\n Enums can also be used with string literal types to create more complex data structures. For example, you can create an enum that represents different user roles and use it to control access to certain parts of your application. \n\n Enums can also be used with union types to create more flexible data structures. For example, you can create a union type that allows a variable to hold either a string or an enum value. This allows you to create more complex data structures while still maintaining type safety. \n\n Enums are useful for defining a set of related values that can be used throughout your code. They improve code readability and help prevent errors by providing a clear set of options.",
+            "output": "0"
+        },
+        {
+            "title": "Type Aliases",
+            "filename": "type-aliases",
+            "fileType": ".ts",
+            "code": "type Point = { x: number; y: number };\nlet point: Point = { x: 10, y: 20 };\nconsole.log(point.x);",
+            "description": "Type aliases allow you to create a new name for an existing type. This can be useful for creating more descriptive names for complex types. In this example, we define a type alias called Point that represents an object with x and y properties. We then create a variable of type Point and access its properties.",
+            "output": "10"
+        },
+        {
+            "title": "Optional Chaining",
+            "filename": "optional-chaining",
+            "fileType": ".ts",
+            "code": "interface User {\n    name: string;\n    address?: {\n        city: string;\n        country: string;\n    };\n}\n\nlet user: User = { name: 'Alice' };\nconsole.log(user.address?.city);",
+            "description": "Optional chaining allows you to safely access properties of an object that may be null or undefined. In this example, we use the ?. operator to access the city property of the address object only if it exists. If address is undefined, the expression evaluates to undefined instead of throwing an error. \n\n Optional chaining can be used with function calls and array indexing as well. This allows you to safely call methods or access array elements without worrying about null or undefined values.",
+            "output": "undefined"
+        },
+        {
+            "title": "Safe Navigation Operator (!)",
+            "filename": "safe-navigation",
+            "fileType": ".ts",
+            "code": "interface User {\n    name: string;\n    address?: {\n        city: string;\n        country: string;\n    };\n}\n\nlet user: User = { name: 'Alice' };\nconsole.log(user.address!.city);",
+            "description": "The safe navigation operator (!) is used to assert that a value is not null or undefined. In this example, we use the ! operator to assert that the address property exists before accessing its city property. This allows us to avoid TypeScript errors when accessing properties of potentially null or undefined values. \n\n However, you should use the safe navigation operator judiciously, as it can lead to runtime errors if the value is actually null or undefined. It's generally better to use optional chaining (?.) when possible.",
+            "output": "TypeError: Cannot read properties of undefined (reading 'city')"
+        },
+        {
+            "title": "Module Export Types",
+            "filename": "module-export-types",
+            "fileType": ".ts",
+            "code": "export type User = {\n    name: string;\n    age: number;\n};\n\nexport function greet(user: User): string {\n    return `Hello, ${user.name}!`;\n}",
+            "description": "In TypeScript, you can export types and functions from a module. This allows you to create reusable components that can be imported in other files. In this example, we define a type called User and a function called greet that takes a User object as an argument. We then export both the type and the function for use in other modules.",
+            "output": ""
+
+        }
+    ]
+}

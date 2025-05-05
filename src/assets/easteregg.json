@@ -1,0 +1,118 @@
+{
+    "language": "Godot",
+    "documentationUrl": "https://docs.godotengine.org/en/stable/index.html",
+    "snippets": [
+      {
+        "title": "Sneaky! Godot Starter ⭐",
+        "fileName": "Main",
+        "fileType": ".gd",
+        "code": "\nextends Node2D\n\nfunc _ready():\n    print(\"Hello, Godot!\")",
+        "description": "# You found an easter egg! 😎 \n Since you are bored enough to be looking for easter eggs in a wallpaper, let me reward you with cool gamedev wizard knowledge 🧙‍♂️. You may go to the next lesson for starting out! \n\n Keep this a secret to everybody! 🤫 \n\n Godot 4.4 is a game engine that allows you to create 2d and 3d games by using a Node system. Godot is friendly to both programming newbies and expert code hermits, so you can use it to create your own game without having to learn a lot of new stuff.\n However, if you have a programming background, your gamedev journey will go swimmingly, as Godot lets you use GDScript, C#, or even VisualScript to create your game. We'll be focusing on GDScript, since it's the most supported and easiest to configure with Godot's systems.",
+        "output": "Hello, Godot!"
+      },
+      {
+        "title": "The Godot Development Cycle",
+        "fileName": "Main",
+        "fileType": ".gd",
+        "code": "extends Node2D\n\nfunc _ready():\n    print(\"Hello, Godot!\")\n\nfunc _process(delta):\n    print(\"Processing...\")",
+        "description": "The Godot development cycle is a process that involves creating, testing, and iterating on your game. You can create scenes, add nodes, and write scripts to define the behavior of your game. The cycle typically involves the following steps:\n\n1. Create a new scene or open an existing one.\n2. Add nodes to the scene to define the structure of your game.\n3. Write scripts to define the behavior of the nodes.\n4. Test your game by running it in the editor.\n5. Iterate on your design by making changes and testing again. \n\n Since all elements in Godot usually involve the creation of nodes separately, you'll find that the best way to compound scenes together is to create a main root node, which you will add your created scenes to as nodes. Nodes inside the main node that you are working in are accessible by using functions such as get_node(\"NodeName\") or get_children(). \n\n Since game architectures are an important part of game development, you may find that implementing structures such as Entity-Component-System (ECS) or Model-View-Controller (MVC) are useful for your game, and are easily implemented in Godot due to its node structure.",
+        "output": "Hello, Godot!\nProcessing...\nProcessing...\nProcessing...\nProcessing...\nProcessing...\n"
+      },
+      {
+        "title": "Game Loop",
+        "fileName": "Main",
+        "fileType": ".gd",
+        "code": "extends Node2D\n\nfunc _ready():\n    print(\"Hello, Godot!\")\n\nfunc _process(delta):\n    print(\"Processing...\")",
+        "description": "In game development, most engines use an `update()` function as the core of their game loop - code that executes every frame to update the game state. Godot follows this pattern with its `_process()` function.\n\nIn Godot:\n\n1. You create Nodes to handle UI elements\n2. You attach scripts to these nodes to control their behavior\n3. When extending from Node2D, your script typically includes:\n   - `_ready()`: Runs once when the node loads\n   - `_process(delta)`: Runs every frame\n   - `_physics_process(delta)`: Runs every physics frame (at a fixed rate, default 60fps)\n\nGodot also provides other built-in functions like `_input()` and `_draw()` that you can implement to handle specific behaviors.",
+        "output": "Hello, Godot!\nProcessing...\nProcessing...\nProcessing...\nProcessing...\nProcessing...\n"
+      },
+      {
+        "title": "Signals",
+        "fileName": "Main",
+        "fileType": ".gd",
+        "code": "extends Node2D\n\nsignal my_signal\n\nfunc _ready():\n    emit_signal(\"my_signal\")\n    print(\"Signal emitted!\")",
+        "description": "Signals are a way to communicate between nodes in Godot. They are similar to reactive programming concepts. You can define signals in your script using the signal keyword. In this example, we define a signal called my_signal and emit it in the _ready() function. You can connect signals to functions to respond to events. \n\n Generally, signals are used to communicate between nodes, and are a great way to decouple your code. There are two ways to connect signals: \n\n1. Connect a signal to a function in the same or another script using the connect() method. \n2. Connect via the inspector, which allows you to connect signals to functions in the editor. \n\n Use cases for signals include: \n\n- Responding to user input (e.g., button clicks)\n- Triggering events in other nodes (e.g., animations, sounds)\n- Communicating between different parts of your game (e.g., game state changes)",
+        "output": "Signal emitted!"
+      },
+      {
+        "title": "Resources",
+        "fileName": "Main",
+        "fileType": ".gd",
+        "code": "extends Node2D\n\nvar my_resource = preload(\"res://path/to/resource.tscn\")\n\nfunc _ready():\n    var instance = my_resource.instance()\n    add_child(instance)",
+        "description": "Resources are reusable assets in Godot. You can preload resources using the preload() function. In this example, we preload a scene resource and instance it in the _ready() function. \n\n The power of resources doesn't stop there. You can also use them to create reusable scripts, shaders, and other assets. Whereas in other environments you are provided with a wide variety of choices for handling data, assets, file resources and other things, Godot provides you with the capability to centralize all of these into a single resource system. \n\n Resources are a great way to create reusable assets in your game. You can use them to create:\n\n- Reusable scripts (e.g., custom nodes, components)\n- Shaders (e.g., materials, post-processing effects)\n- Data files and Databases (e.g., JSON, CSV)\n- Scenes (e.g., UI elements, game objects)",
+        "output": ""
+      },
+      {
+        "title": "Custom Resources",
+        "fileName": "MyResource",
+        "fileType": ".gd",
+        "code": "extends Resource\n\nclass_name MyResource\n\nvar my_variable: int\n\nfunc _init():\n    my_variable = 0",	 
+        "description": "As stated previously, resources provide you with the capability to create reusable functionality and structural integrity in your game. You create custom resources by extending the Resource class. Afterwards, you can create resources based on your custom class. \n\n\n In this example, we create a custom resource called MyResource that has a variable called my_variable. You can use custom resources to create reusable data structures, configurations, and other assets in your game. \n\n Custom resources are useful for creating:\n\n- Reusable data structures (e.g., inventory items, character stats)\n- Configurations (e.g., game settings, level data)\n- Other assets (e.g., animations, materials) \n\nOne specific use of custom resources is the use of SaveGameData, which allows you to save and load game data easily. You can create a custom resource that stores your game data and use it to save and load your game state.",
+        "output": ""
+      },
+      {
+        "title":"SaveGame Resource",
+        "fileName": "SaveGameData",
+        "fileType": ".gd",
+        "code": "extends Node\n\nvar player_data_resource: PlayerData\nvar save_file_path: String = \"\"  # This is only used for saving/loading\n\nfunc _ready():\n    if save_file_path.is_empty():\n        printerr(\"Save file path not set! Cannot load player data.\")\n        return\n\n    load_player_data()\n\nfunc set_save_path(path: String):\n    save_file_path = path\n\nfunc set_player_data(resource: PlayerData):\n    player_data_resource = resource\n\nfunc load_player_data():\n    if save_file_path.is_empty():\n        printerr(\"Save file path is not set! Cannot load data.\")\n        return\n\n    if FileAccess.file_exists(save_file_path):\n        player_data_resource = load(save_file_path)\n    else:\n        # Use a default preset, duplicated to avoid modifying the original\n        player_data_resource = preload(\"res://resources/save_data/player_data_preset.tres\").duplicate(true)\n\n# Only call this when you explicitly want to save\nfunc save_player_data():\n    if save_file_path.is_empty():\n        printerr(\"Save file path is not set! Cannot save data.\")\n        return\n\n    if player_data_resource:\n        ResourceSaver.save(player_data_resource, save_file_path)",
+        "description": "Custom resources are a great way to enable save data in your game. In this specific example, we create a custom resource called PlayerData that stores player data. By making use of the ResourceSaver class and the FileAccess class, we can make a save system that allows us to save and load player data from a file. \n\n By making use of the resource file, we are able to create reusable resources that are used to store player data. When we are ready to commit the data, we make use of the functions specified natively in the resources to save and load data accordingly. Because we can save anything we want in the player data resource, we get to access all of the specified properties whenever we save or load the data from the file. \n\n We can even extend the functionality of the resource to allow for autosaving depending on game conditions.",
+        "output": ""
+      },
+      {
+        "title": "Node Types",
+        "fileName": "Main",
+        "fileType": ".gd",
+        "code": "extends Node2D\n\nfunc _ready():\n    var sprite = Sprite.new()\n    add_child(sprite)\n    sprite.texture = preload(\"res://path/to/texture.png\")",
+        "description": "In Godot, nodes are the building blocks of your game. There are many different types of nodes, each with its own purpose. Nodes fall into the following categories:\n\n- Scene nodes: These are the basic building blocks of your game. They can be used to create 2D and 3D scenes.\n- Control nodes: These are used to create UI elements, such as buttons, labels, and panels.\n- Physics nodes: These are used to create physics-based objects, such as rigid bodies, kinematic bodies, and static bodies.\n- Audio nodes: These are used to play sounds and music in your game.\n\n In this example, we create a new Sprite node and add it to the scene. We also preload a texture and assign it to the sprite's texture property. \n\n You can use different node types to create different types of objects in your game. For example, you can use a KinematicBody2D node to create a player character that can move around the screen. You can use a RigidBody2D node to create a physics-based object that interacts with other objects in the scene.",
+        "output": ""
+      },
+      {
+        "title": "Animation",
+        "fileName": "Main",
+        "fileType": ".gd",
+        "code": "extends Node2D\n\nvar animation_player: AnimationPlayer\n\nfunc _ready():\n    animation_player = $AnimationPlayer\n    animation_player.play(\"my_animation\")",
+        "description": "In Godot, you can create animations using the AnimationPlayer node. The AnimationPlayer node allows you to create and play animations for any property of any node in your scene. You can create animations for position, rotation, scale, color, and more.\n\n In this example, we create an AnimationPlayer node and play an animation called my_animation. You can create animations using the Animation panel in the editor. \n\n You can use animations to create:\n\n- Character animations (e.g., walking, jumping)\n- UI animations (e.g., button hover effects)\n- Environmental animations (e.g., moving platforms, doors) \n\n The general best practice for use of animations from the AnimationPlayer of a specific node is to name specific animations based on their context use. This is because there may be cases where external sibling or parent nodes may need to access the AnimationPlayer of a specific node. In this case, depending on the reaction of the animated node, you may need to trigger an animation based on the context of the node that is triggering it. \n\n For example, say an enemy node hits a player node. You would expect the player to play a corresponding hit animation. If you attach a corresponding signal or behavior, your animation player will be able to respond correctly by executing the correct animation through the use of the play function and the name of the specified animation. \n\n ## Complex Cases \n\n That said, the behavior of a complex game will probably require you to create a custom animation system that allows you to trigger animations based on the context, reaction and other factors. In this case, you may prefer to use AnimationTree, which allows you to create complex animation systems using a node-based interface. \n\n You can also use AnimationTree to create blend trees, which allow you to blend between different animations based on parameters. This is useful for creating smooth transitions between animations, such as blending between walking and running animations. \n\n This is particularly useful in the case that you are managing your game with a state machine. In this case, you can use AnimationTree to create a state machine that allows you to switch between different animations based on the current state of your game. \n\n You can also use AnimationTree to create animation layers, which allow you to play multiple animations at the same time. This is useful for creating complex animations that involve multiple parts of a character or object.",
+        "output": ""
+      },
+      {
+        "title": "State Machine",
+        "fileName": "Main",
+        "fileType": ".gd",
+        "code": "extends Node2D\n\nenum State { IDLE, WALKING, JUMPING }\nvar current_state: State = State.IDLE\n\nfunc _ready():\n    set_state(State.WALKING)\n\nfunc set_state(new_state: State):\n    current_state = new_state\n    match current_state:\n        State.IDLE:\n            print(\"Idle state\")\n        State.WALKING:\n            print(\"Walking state\")\n        State.JUMPING:\n            print(\"Jumping state\")",
+        "description": "In game development, a state machine is a design pattern that allows you to manage the different states of your game. In Godot, you can create a state machine using an enum and a variable to track the current state. \n\n In this example, we create a simple state machine with three states: IDLE, WALKING, and JUMPING. We use the set_state() function to change the current state and print the corresponding message. \n\n State machines are useful for managing complex game logic, such as character animations, AI behavior, and game flow. You can use state machines to create:\n\n- Character states (e.g., idle, walking, jumping)\n- AI states (e.g., patrol, chase, attack)\n- Game flow states (e.g., menu, playing, paused) \n\n State machines are a powerful tool for managing complex game logic. You can use them to create more organized and maintainable code. \n\n ## Node State Machine \n\n Enum state machines are not the only way to create state machines. By taking advantage of the node inheritance system, you can create a state machine that is composed of nodes. For example, imagine an enemy that has a set amount of animations and behaviors: if it is idle, it plays the idle animation and moves around. If it spots the player, it engages in chase and plays a running animation. If it loses sight of the player, it goes back to its origin point, and then goes back to its idle state. \n\n All of this can be achieved by attaching these behaviours to a state machine that manages all of the mentioned behaviors as nodes. Since all of these nodes would have a corresponding script attached to them, which would execute the said logic once the node is active, you would have a state machine composed entirely of node behavior. This is a way to extend the state machine pattern beyond the enum state machine, and allows you to create more complex state machines that are easier to manage and allow for scalability and complexity. \n\n ## Animation State Machine \n\n You can also use AnimationTree to create a state machine that allows you to switch between different animations based on the current state of your game. This is useful for creating complex animations that involve multiple parts of a character or object. In comparison to a node state machine, the animation state machine is bound to the use of animations as flags for the state machine. This means that you can use the animation state machine to create a state machine that is based on the current animation of the character or object. This ties the current animation to action, effectively creating a state machine that is based on the current animation of the character or object. \n\n This approach is generally preferred in cases where you need certain animations to influence action, such as in 3D physics games where models, collisions and other factors are paramount as important as other script behavior. For example, imagine a game that implements a parry/ripose mechanic. In this case, you would need to create a state machine that is able to evaluate the current animation frames and correctly assert which action occurs based on the elapsed time or behavior of the playing animation. \n\n Animation State Machines can also be achieved in 2D games, but because the general nature of 2D games does not lend itself to always exhibiting cases where complex animations must influence action, it is not necessarily one of the best approaches to take head first due to its complexity, as you are probably able to create simpler state machines.",
+        "output": "Idle state\nWalking state"
+      },
+      {
+        "title": "@export decorator",
+        "fileName": "Main",
+        "fileType": ".gd",
+        "code": "extends Node2D\n\n@export var my_variable: int = 0\n\nfunc _ready():\n    print(my_variable)",
+        "description": "In Godot, you can use the @export decorator to expose variables to the editor. This allows you to modify the variable's value in the editor without having to change the code. \n\n In this example, we create a variable called my_variable and use the @export decorator to expose it to the editor. You can modify the value of my_variable in the editor, and it will be reflected in the game. \n\n The @export decorator is useful for creating customizable properties for your nodes. You can use it to create:\n\n- Customizable properties (e.g., speed, health)\n- Editor-only properties (e.g., debug options)\n- Other properties (e.g., colors, textures) \n\n The @export decorator is a powerful tool for creating customizable properties in your game. You can use it to create more flexible and maintainable code.",
+        "output": "0"
+      },
+      {
+        "title": " @onready decorator",
+        "fileName": "Main",
+        "fileType": ".gd",
+        "code": "extends Node2D\n\n@onready var my_button = $MyButton\n\nsignal my_signal\n\nfunc _ready():\n    my_button.connect(\"pressed\", self, \"_on_button_pressed\")\n    emit_signal(\"my_signal\")\n    print(\"Signal emitted!\")\n\nfunc _on_button_pressed():\n    print(\"Button pressed!\")",
+        "description": "In Godot, you can use the @onready decorator to initialize variables when the node is ready. This allows you to access nodes and properties in your script without having to use the get_node() function. \n\n In this example, we create a variable called my_button and use the @onready decorator to initialize it when the node is ready. We also connect the button's pressed signal to a function that prints a message when the button is pressed. \n\n The @onready decorator is useful for creating more readable and maintainable code. You can use it to create:\n\n- Readable code (e.g., accessing nodes and properties)\n- Maintainable code (e.g., avoiding get_node() calls)\n- Other properties (e.g., signals, functions) \n\n The @onready decorator is a powerful tool for creating more readable and maintainable code in your game.",
+        "output": "Signal emitted!\nButton pressed!"
+      },
+      {
+        "title":"Globals",
+        "fileName": "Globals",
+        "fileType": ".gd",
+        "code": "extends Node\n\nvar my_global_variable: int = 0\n\nfunc _ready():\n    print(my_global_variable)",
+        "description": "There may come a point where you realize one or many specific variables must be accessible from anywhere in your game. There are many ways to achieve making global variables. One of the most common ways to achieve this is by using the Globals singleton. This would essentially be a script that is loaded at the start of your game, and is accessible from anywhere in your game. To achieve this, you create your singleton, and then go to Project Settings > AutoLoad and add your script as a singleton. \n\n In this example, we create a global variable called my_global_variable. If your singleton is autoloaded, you will then be able to access this variable from anywhere in your game by calling Globals.my_global_variable in any script.",
+        "output": "0"
+      },
+      {
+        "title":"Testing with GUT",
+        "fileName": "Tests",
+        "fileType": ".gd",
+        "code": "extends \"res://addons/gut/test.gd\"\n\nfunc test_addition():\n    var result = 2 + 2\n    assert_eq(result, 4, \"2 + 2 should equal 4\")\n\nfunc test_subtraction():\n    var result = 5 - 3\n    assert_eq(result, 2, \"5 - 3 should equal 2\")\n\nfunc test_mocking():\n    var mock = Mock.new()\n    mock.expect_call(\"do_something\").and_return(42)\n\n    var result = mock.do_something()\n    assert_eq(result, 42, \"Mocked function should return 42\")\n\nfunc test_async():\n    yield(yield_for(1), YIELD)\n    assert_true(true, \"Async test passed\")\n\nfunc test_signal():\n    var emitter = Node.new()\n    emitter.add_user_signal(\"my_signal\")\n    var signal_called = false\n\n    emitter.connect(\"my_signal\", self, \"_on_my_signal\")\n    emitter.emit_signal(\"my_signal\")\n\n    func _on_my_signal():\n        signal_called = true\n\n    assert_true(signal_called, \"Signal should have been called\")",
+        "description": "Most developers decide to not create tests for their games. However, there is a huge benefit to taking the time to create tests for your game. One can even make use of testing oriented programming to ensure that the behavior of the game is correct. If your game is one that may change a lot, or if you intend to work on a team, you will find that creating test suites will facilitate the process of maintaining and scaling the development of your game. The most common way to obtain testing functionality is by installing the GUT plugin from the assets store. \n\nGUT (Godot Unit Testing) is a third-party testing framework for Godot. It provides a more powerful and flexible testing framework than the built-in testing framework. You can run your tests using the editor or the command line. \n\n GUT is useful for creating:\n\n- Unit tests (e.g., testing individual functions)\n- Integration tests (e.g., testing multiple functions together)\n- Other tests (e.g., performance tests) \n\n To use GUT, you need to install it as a plugin. You can do this by going to the Asset Library in the editor and searching for GUT. Once you have installed it, you can create test scripts and run them using the GUT test runner. ",
+        "output": ""
+      }
+    ]
+}
