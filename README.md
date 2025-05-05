@@ -1,12 +1,12 @@
 # JavaScript Tips Wallpaper
 
-This application is a dynamic wallpaper engine that displays useful JavaScript tips and tricks directly on your desktop. It is built using Vue 3, TypeScript, and Vite, leveraging modern web technologies to provide a seamless and interactive experience.
+This is a simple application intended as a wallpaper for your desktop, showcasing rotating JavaScript tips. It is built using Vue 3 with `<script setup>` syntax and TypeScript for type safety.
 
 ## Features
 
-- **Dynamic Tips**: Rotating JavaScript tips to enhance your coding knowledge.
+- **Dynamic Tips**: Rotating JavaScript tips to enhance your coding experience. Meant as support for your daily coding rather than a full documentation guide.
 - **Lightweight**: Built with performance in mind using Vue 3 and Vite.
-- **Modern Tech Stack**: Utilizes TypeScript for type safety and `<script setup>` for concise Vue components.
+- **Various Framework Guide**: Quick concepts from popular frameworks like React, Angular, and Vue.
 
 ## Getting Started
 
@@ -33,3 +33,11 @@ This application is a dynamic wallpaper engine that displays useful JavaScript t
 - Explore the [Vue Docs TypeScript Guide](https://vuejs.org/guide/typescript/overview.html#project-setup) for tips on using TypeScript with Vue.
 
 Enjoy learning JavaScript while keeping your desktop lively!
+
+## To Do
+- [ ] Add more tips and frameworks.
+- [ ] Implement wallpaper customization interactivity for wallpaper engine.
+- [ ] Implement background image support.
+- [ ] Implement capability to add custom languages and tips from wallpaper engine presets (pending investigation).
+- [ ] Implement more lightweight visual effects and animations.
+- [ ] Implement transparency, blur, and corresponding support for wallpaper engine.
